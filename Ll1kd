@@ -1,5 +1,3 @@
-local buttonPath = game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.MainFrame.TutorialFrame.SkipAll.SkipAllButton
-
 local function pressEnter()
     local virtualInput = game:GetService("VirtualInputManager")
     virtualInput:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
@@ -7,11 +5,22 @@ local function pressEnter()
     virtualInput:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
 end
 
+local function findSkipButton()
+    local tutorialFrame = game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.MainFrame:FindFirstChild("TutorialFrame")
+    if tutorialFrame then
+        local skipAll = tutorialFrame:FindFirstChild("SkipAll")
+        if skipAll then
+            return skipAll:FindFirstChild("SkipAllButton")
+        end
+    end
+    return nil
+end
+
 local function navigateAndPressEnter()
+    local buttonPath = findSkipButton()
     if buttonPath and buttonPath:IsA("TextButton") and buttonPath.Visible then
         game:GetService("GuiService").SelectedObject = buttonPath
         wait(0.1)
-
         pressEnter()
     end
 end
