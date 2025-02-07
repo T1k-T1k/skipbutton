@@ -1,0 +1,23 @@
+local buttonPath = game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.MainFrame.TutorialFrame.SkipAll.SkipAllButton
+
+local function pressEnter()
+    local virtualInput = game:GetService("VirtualInputManager")
+    virtualInput:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+    wait(0.2)
+    virtualInput:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+end
+
+local function navigateAndPressEnter()
+    if buttonPath and buttonPath:IsA("TextButton") and buttonPath.Visible then
+        game:GetService("GuiService").SelectedObject = buttonPath
+        wait(0.1)
+
+        -- Нажимаем Enter
+        pressEnter()
+    end
+end
+
+while true do
+    navigateAndPressEnter()
+    wait(4)
+end
