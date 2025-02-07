@@ -12,7 +12,6 @@ local function navigateAndPressEnter()
         game:GetService("GuiService").SelectedObject = buttonPath
         wait(0.1)
 
-        -- Нажимаем Enter
         pressEnter()
     end
 end
